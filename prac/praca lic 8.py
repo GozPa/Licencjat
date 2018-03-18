@@ -27,12 +27,6 @@ demografia = pd.concat(demografia)
 demografia.rename(columns = lambda x: x[0:-2], inplace = True)
 demografia = demografia.set_index('WIEK/lata ukończone\n(dane za 2017 r.)\nK - Kobiety\nM - Mężczyźni\nR - Raz')
 
-# Dane o bezpieczeństwie
-Name = ['Dzielnica','Wskaźnik przestępczosci rok 2015','Wskaźnik przestępczosci rok 2016','Zmiana % w latachy 2015/16']
-bezp = pd.read_excel('Bezpieczeństwo.xlsx',sheet_name = [1],skiprows = [0,1],skip_footer = 125, usecols = [1,6,7,10],header = 1,names = Name)
-# Zamiana na Data Frame
-bezp = pd.concat(bezp)
-bezp = bezp.set_index('Dzielnica')
 
 # Tworzenie wektorów aby było wiadomo które dzielnice są koło siebie.
 Aniołki = ['Aniołki','Wrzeszcz Górny','Wrzeszcz Dolny','Suchanino','Śródmieście','Młyniska','Siedlce']
@@ -73,6 +67,16 @@ ZaspaR = ['Zaspa Rozstaje','Wrzeszcz Dolny','Brzeźno','Przymorze Wielkie','Zasp
 # Storzenie dzielnic, z którymi granicą podane.
 Dzielnice = pd.DataFrame([Aniołki, Brętowo, Brzeźno, Chełm, Jasień, Kokoszki, Krakowiec, Letnica, Matarnia, Młyniska, Port, Oliwa, Olszynka, Orunia, Osowa, Piecki, Przeróbka, PrzymorzeM, PrzymorzeW, Rudniki, Siedlce, Stogi, Strzyża, Suchanino, Ujeścisko, WrzeszczG, WrzeszczD, Wyspa, Wzgórze, ZaspaM, ZaspaR, Żabianka, Śródmieście])
 Dzielnice = Dzielnice.set_index(0)
+
+# Dane o bezpieczeństwie
+Name = ['Dzielnica','PRZESTĘPSTWA NA 1000 MIESZKAŃCÓW W 2014 R.','PRZESTĘPSTWA NA 1000 MIESZKAŃCÓW W 2015 R.','PRZESTĘPSTWA NA 1000 MIESZKAŃCÓW W 2016 R.']
+bezp = pd.read_excel('Bezpieczeństwo.xlsx',sheet_name = [1],skiprows = [0,1],skip_footer = 125, usecols = [1,8,9,10],header = 1,names = Name)
+
+# Zamiana na Data Frame
+bezp = pd.concat(bezp)
+bezp = bezp.set_index('Dzielnica')
+
+
 
 # Docelowy program. Wiek jest ustalany z tym ile lat skończył w 2017. Ponieważ takie są dane.
 a=input('Podaj dzielnicę: ')
