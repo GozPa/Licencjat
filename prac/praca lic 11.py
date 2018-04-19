@@ -5,7 +5,6 @@ Created on Mon Feb  5 15:31:27 2018
 @author: Paulinka
 """
 import Szkoły
-import pandas as pd
 
 # Docelowy program. Wiek jest ustalany z tym ile lat skończył w 2017. Ponieważ takie są dane. (jest też głupko odpornoć)
 a=input('Podaj dzielnicę: ')
@@ -41,25 +40,25 @@ c=int(2018-float(b))
 d=a.upper()
 
 # Pokazuje ile w danej dzielnicy jest dzieci w podanym wieku
-print('\n W wieku', c , 'w dzielnicy', d , 'jest ', Szkoły.demografia.at[c,d],'dzieci \n')
+print('W wieku', c , 'w dzielnicy', d , 'jest ', Szkoły.demografia.at[c,d],'dzieci \n')
 
 k=[0,0,0,0,0,0,0]
 # Działanie na celu zlikwidowania powiadomienia DataFrame  is empty
 for i in range(0, 7):
     if Szkoły.szkoly[i][Szkoły.szkoly[i]['Dzielnica']==a].empty == True:
-        k[i] = pd.Series()
+       pass
     else:
-        k[i]=Szkoły.szkoly[i][Szkoły.szkoly[i]['Dzielnica']==a]['Szkoła']
+        k[i]=Szkoły.szkoly[i][Szkoły.szkoly[i]['Dzielnica']==a]
 
 
 # Wyszukuje szkoły dla danych dzielnic i wieku.
-#for i in range (0,7):
-#    if type(k[i]) is int:
-#        k[i] = pd.Series()
-#    else:
-#        k[i]=k[i]
+for i in range (0,7):
+    if type(k[i]) is int:
+        k[i] = 'brak'
+    else:
+        k[i]=k[i]
             
-if f == ('N') :
+if f in ['n','N'] :
     if c < 4 :
         print('Nie mam danych o żłobkach.')
     elif c < 6 :
@@ -74,7 +73,7 @@ else :
     print('Pani/Pana dziecko może iść do tych szkół w podanej dzielnicy:',k[6] ,'\n')
 
 
-t=[0,0,0,0,0,0,0]   
+t=[0,0,0,0,0,0,0]     
 # Wyznaczenie pobliskich dzielnic.
 print('Pani/Pana dziecko może iść do tych szkół w pobliskich dzielnicach: \n')
 for i in Szkoły.Dzielnice.loc[a,:] :
@@ -86,7 +85,7 @@ for i in Szkoły.Dzielnice.loc[a,:] :
             if Szkoły.szkoly[n][Szkoły.szkoly[n]['Dzielnica']==i].empty == True:
                 pass
             else:
-                t[n]=Szkoły.szkoly[n]['Szkoła'][Szkoły.szkoly[n]['Dzielnica']==i]
+                t[n]=Szkoły.szkoly[n][Szkoły.szkoly[n]['Dzielnica']==i]
 
 for i in range (0,7):
     if type(t[i]) is int:
@@ -96,7 +95,7 @@ for i in range (0,7):
 
 # Dla okolicznych dzielnic.
 
-if f == ('N') :
+if f in ['n','N'] :
     if c < 4 :
         print('Nie mam danych o żłobkach.\n')
     elif c < 6 :
