@@ -15,7 +15,7 @@ bezp = pd.read_excel('Bezpieczeństwo.xlsx', sheet_name = [1], skiprows = [0,1],
 
 # Zamiana na Data Frame
 bezp = pd.concat(bezp)
-bezp = bezp.set_index('Dzielnica')
+
 
 e=np.zeros(3)
 
@@ -31,10 +31,10 @@ a = [2014, 2015, 2016]
 
 for i in range(0,34):        
     b=bezp[i:i+1]
-    for j in range(0,3):
-        e[j]=b.iat[0,j] 
-    bezp.iat[i,3]=Interpolacja(a,e,1)
-    bezp.iat[i,4]=Interpolacja(a,e,2)
-    bezp.iat[i,5]=Error(a,e,1)
-    bezp.iat[i,6]=Error(a,e,2)
+    for j in range(1,4):
+        e[j-1]=b.iat[0,j] 
+    bezp.iat[i,4]=Interpolacja(a,e,1)
+    bezp.iat[i,5]=Interpolacja(a,e,2)
+    bezp.iat[i,6]=Error(a,e,1)
+    bezp.iat[i,7]=Error(a,e,2)
  

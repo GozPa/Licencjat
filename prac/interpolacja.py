@@ -22,5 +22,5 @@ def Error(x,y,s):
     Error = np.zeros(3)
     for i in range(0,3):
         Error[i]=(p(x[i])-y[i])*(p(x[i])-y[i])
-    Error = np.sqrt(np.sum(Error))
+    Error = np.sqrt(np.sum(Error)/len(Error))
     return Error
